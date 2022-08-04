@@ -58,7 +58,7 @@
 					<div class="flex gap-x-8 items-center relative">
 						<div class="flex flex-row items-center gap-x-8">
 							{#if me}
-								<div class="">
+								<div>
 									<a
 										class="inline-flex items-center justify-center gap-x-2"
 										href={`/${me.get('ethAddress')}`}
