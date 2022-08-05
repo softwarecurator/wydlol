@@ -51,7 +51,7 @@
 	<div class="relative z-20">
 		<div class="flex items-center justify-between px-4 py-5">
 			<div>
-				<a href="/trending" class="text-4xl">wyd lol?</a>
+				<a href="/trending" class="text-4xl">wyd lol? 🙈</a>
 			</div>
 			<div class="flex items-center justify-end gap-x-8">
 				<div class="flex items-center text-sm">

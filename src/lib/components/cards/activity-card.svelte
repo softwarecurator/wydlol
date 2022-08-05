@@ -6,7 +6,7 @@
 	export let activity;
 </script>
 
-<div class="flex grow max-w-lg mb-5">
+<div class="flex grow max-w-lg mb-5 divide-y divide-black">
 	<div class="flex flex-col w-full items-start m-2">
 		<div class="flex flex-row items-start justify-start gap-2 my-2">
 			<div class="flex items-center justify-center h-full">
