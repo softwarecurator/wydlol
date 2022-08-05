@@ -18,7 +18,7 @@
 	<h1>loading</h1>
 {:then trending}
 	<h2 class="text-center text-3xl mb-4 flex items-center justify-center">
-		TRENDING <div class="mx-2 flex items-center justify-center h-full">
+		<div class="mx-2 flex items-center justify-center h-full">
 			<img
 				class="rounded-full w-10 h-10 m-2 md:m-0"
 				src={trending.activities[0].collection.collectionImage}
