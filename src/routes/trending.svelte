@@ -17,10 +17,10 @@
 {#await trendingData}
 	<h1>loading</h1>
 {:then trending}
-	<h2 class="text-center text-3xl mb-4 flex items-center justify-center">
+	<h2 class="text-center text-xl md:text-3xl mb-4 flex items-center justify-center">
 		<div class="mx-2 flex items-center justify-center h-full">
 			<img
-				class="rounded-full w-10 h-10 m-2 md:m-0"
+				class="rounded-full w-14 h-14 md:w-10 md:h-10 m-2 md:m-0"
 				src={trending.activities[0].collection.collectionImage}
 				alt=""
 			/>
