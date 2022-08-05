@@ -1,6 +1,6 @@
-export const getTrendingFeed = async (): Promise<any> => {
+export const getTrendingFeed = async (contractAddr): Promise<any> => {
 	const data = await fetch(
-		`https://api.reservoir.tools/collections/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/activity/v1?limit=20&types=sale`,
+		`https://api.reservoir.tools/collections/${contractAddr}/activity/v1?limit=20&types=sale&types=ask&types=transfer`,
 		{
 			method: 'GET',
 			headers: {
