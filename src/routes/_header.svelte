@@ -67,6 +67,7 @@
 											class="h-10 w-10 object-cover border rounded-full cursor-pointer flex-shrink-0"
 										>
 											<img
+												alt="me"
 												class="rounded-full w-full h-auto"
 												src={blockies
 													.create({ seed: me.get('ethAddress').toLowerCase() })

@@ -41,7 +41,7 @@
 								<div class=" flex flex-col items-start gap-4">
 									<div>
 										Sold
-										{activity.token.tokenName} for
+										{activity.token.tokenName ? activity.token.tokenName : activity.token.tokenId} for
 										{activity.price} ETH
 									</div>
 								</div>

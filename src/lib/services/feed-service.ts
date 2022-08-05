@@ -1,6 +1,6 @@
 export const getTrendingFeed = async (): Promise<any> => {
 	const data = await fetch(
-		`https://api.reservoir.tools/collections/0xC8Ccad799D1d7b142C49b7873D8bCf96511b6eB0/activity/v1?limit=20&types=sale`,
+		`https://api.reservoir.tools/collections/0xbc4ca0eda7647a8ab7c2061c2e118a18a936f13d/activity/v1?limit=20&types=sale`,
 		{
 			method: 'GET',
 			headers: {
