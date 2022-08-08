@@ -25,7 +25,7 @@
 
 <div class="flex flex-col items-center">
 	{#each activities as activity}
-		{#if activity.token?.tokenImage || activity.token?.tokenName}
+		{#if activity.token?.tokenImage || activity.token?.tokenName || activity.token?.tokenId}
 			<ActivityCard {activity} {getMore} bind:continuation bind:lastElement />
 		{/if}
 	{/each}

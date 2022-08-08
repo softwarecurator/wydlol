@@ -45,7 +45,10 @@
 						/>
 					</div>
 				</div>
-				<div class=" flex flex-col items-start gap-4">
+				<a
+					href={`/${activity.collection.collectionId}/${activity.token.tokenId}`}
+					class=" flex flex-col items-start gap-4 hover:underline hover:cursor-pointer"
+				>
 					{#if activity.type === 'sale'}
 						<div>
 							Sold
@@ -65,9 +68,14 @@
 							{formatUsername(activity.toAddress)}
 						</div>
 					{/if}
-				</div>
+				</a>
 			</div>
 		</div>
-		<img src={activity.token.tokenImage} alt="token" />
+		<a
+			href={`/${activity.collection.collectionId}/${activity.token.tokenId}`}
+			class="hover:cursor-pointer"
+		>
+			<img src={activity.token.tokenImage} alt="token" class="hover:cursor-pointer" />
+		</a>
 	</div>
 </div>

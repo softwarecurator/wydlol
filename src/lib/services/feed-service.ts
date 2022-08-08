@@ -15,3 +15,4 @@ export const getTrendingFeed = async (contractAddr, continuation = ''): Promise<
 	const trending = await data.json();
 	return trending;
 };
+
