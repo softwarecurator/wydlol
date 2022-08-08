@@ -1,6 +1,7 @@
 <script context="module" lang="ts">
 	import { getNFTs } from '$lib/services/user-service';
 	import { validateInputAddresses } from '$lib/utilities/is-address';
+	declare var Moralis: any;
 
 	export async function load({ params, fetch }) {
 		const res = await fetch(`/api/users`, {
@@ -29,9 +30,9 @@
 <script>
 	import * as blockies from 'blockies-ts';
 	import { formatUsername } from '$lib/utilities/format-long-names';
+
 	export let nftData;
 	export let user;
-
 	$: address = user?.mainAddress ? user.mainAddress : user;
 </script>
 

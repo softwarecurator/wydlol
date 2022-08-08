@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getTrendingFeed } from '$lib/services/feed-service';
-	import ActivityCard from '$lib/components/cards/activity-card.svelte';
+	import Timeline from '$lib/components/feed/timeline.svelte';
 
 	const contractAddresses = [
 		'0xC8Ccad799D1d7b142C49b7873D8bCf96511b6eB0',
@@ -27,11 +27,9 @@
 		</div>
 		{trending.activities[0].collection.collectionName} LOL
 	</h2>
-	<div class="flex flex-col items-center">
-		{#each trending.activities as activity}
-			{#if activity.token?.tokenImage || activity.token?.tokenName}
-				<ActivityCard {activity} />
-			{/if}
-		{/each}
-	</div>
+	<Timeline
+		continuation={trending.continuation}
+		activities={trending.activities}
+		contractAddr={trending.activities[0].collection.collectionId}
+	/>
 {/await}

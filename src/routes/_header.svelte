@@ -4,7 +4,7 @@
 
 <script lang="ts">
 	import WalletModal from '$lib/components/modals/wallets.svelte';
-	import { eagerConnect } from '$lib/stores/user';
+	import { eagerConnect, loadUsersProfile, usersProfile } from '$lib/stores/user';
 	import * as blockies from 'blockies-ts';
 
 	$: open = false;
@@ -23,6 +23,10 @@
 		const cookies = getCookies();
 		if ($eagerConnect) {
 			if (cookies['wyd-user'] || cookies['wyd-session']) {
+				const profile = loadUsersProfile();
+				profile.then((data) => {
+					usersProfile.set(data);
+				});
 				return Moralis.User.current();
 			} else {
 				// If cookies absent, reset me/eager-connect/Moralis;
