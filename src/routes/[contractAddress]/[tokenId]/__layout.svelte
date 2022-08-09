@@ -31,23 +31,26 @@
 	});
 </script>
 
-<div class="flex flex-col w-full items-start m-2">
-	<div class="flex items-center justify-center">
-		<h2 class="text-center text-xl md:text-3xl mb-4 flex items-center justify-center">
-			<div class="mx-2 flex items-center justify-center h-full">
-				<img
-					class="rounded-full w-14 h-14 md:w-10 md:h-10 m-2 md:m-0"
-					src={collection.collection.metadata.imageUrl}
-					alt=""
-				/>
+<div class="flex grow max-w-lg mb-2 divide-y divide-black ">
+	<div class="flex flex-col w-full items-start m-2">
+		<div class="flex flex-row items-start justify-start gap-2 my-2">
+			<div class="flex items-center justify-center">
+				<h2 class="text-center text-xl md:text-3xl mb-4 flex items-center justify-center">
+					<div class="mx-2 flex items-center justify-center h-full">
+						<img
+							class="rounded-full w-14 h-14 md:w-10 md:h-10 m-2 md:m-0"
+							src={collection.collection.metadata.imageUrl}
+							alt=""
+						/>
+					</div>
+					{collection.collection.name} LOL
+				</h2>
+				<button class="underline text-center  text-gray-500" on:click={() => goto(previousPage)}
+					>go back</button
+				>
 			</div>
-			{collection.collection.name} LOL
-		</h2>
-		<button class="underline text-center  text-gray-500" on:click={() => goto(previousPage)}
-			>go back</button
-		>
+		</div>
+		<h3>{nftMetadata.metadata.name}</h3>
+		<img src={nftMetadata.media[0].gateway} alt="token" />
 	</div>
-
-	<h3>{nftMetadata.metadata.name}</h3>
-	<img src={nftMetadata.media[0].gateway} alt="token" class="w-1/4 h-1/4 whover:cursor-pointer" />
 </div>

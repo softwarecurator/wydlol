@@ -50,50 +50,52 @@
 	}
 </script>
 
-<div class="relative bg-transparent max-h-[85px] p-2">
-	<WalletModal bind:open />
-	<div class="relative z-20">
-		<div class="flex items-center justify-between px-4 py-5">
-			<div>
-				<a href="/trending" class="text-4xl">wyd lol? 🙈</a>
-			</div>
-			<div class="flex items-center justify-end gap-x-8">
-				<div class="flex items-center text-sm">
-					<div class="flex gap-x-8 items-center relative">
-						<div class="flex flex-row items-center gap-x-8">
-							{#if me}
-								<div>
-									<a
-										class="inline-flex items-center justify-center gap-x-2"
-										href={`/${me.get('ethAddress')}`}
-									>
-										<div
-											class="h-10 w-10 object-cover border rounded-full cursor-pointer flex-shrink-0"
+<nav class="w-full fixed -top-1 z-30">
+	<div class="relative bg-transparent backdrop-blur-xl max-h-[85px] p-2">
+		<WalletModal bind:open />
+		<div class="relative z-20">
+			<div class="flex items-center justify-between px-4 py-5">
+				<div>
+					<a href="/trending" class="text-4xl">wyd lol? 🙈</a>
+				</div>
+				<div class="flex items-center justify-end gap-x-8">
+					<div class="flex items-center text-sm">
+						<div class="flex gap-x-8 items-center relative">
+							<div class="flex flex-row items-center gap-x-8">
+								{#if me}
+									<div>
+										<a
+											class="inline-flex items-center justify-center gap-x-2"
+											href={`/${me.get('ethAddress')}`}
 										>
-											<img
-												alt="me"
-												class="rounded-full w-full h-auto"
-												src={blockies
-													.create({ seed: me.get('ethAddress').toLowerCase() })
-													.toDataURL()}
-											/>
-										</div>
-									</a>
-								</div>
-							{:else}
-								<div class="flex items-center">
-									<div on:click|stopPropagation={openModal} class="btn-cta cursor-pointer">
-										CONNECT WALLET
+											<div
+												class="h-10 w-10 object-cover border rounded-full cursor-pointer flex-shrink-0"
+											>
+												<img
+													alt="me"
+													class="rounded-full w-full h-auto"
+													src={blockies
+														.create({ seed: me.get('ethAddress').toLowerCase() })
+														.toDataURL()}
+												/>
+											</div>
+										</a>
 									</div>
-								</div>
-							{/if}
+								{:else}
+									<div class="flex items-center">
+										<div on:click|stopPropagation={openModal} class="btn-cta cursor-pointer">
+											CONNECT WALLET
+										</div>
+									</div>
+								{/if}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
+</nav>
 
 <style lang="postcss">
 	.btn-cta {

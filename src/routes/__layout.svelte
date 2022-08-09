@@ -33,6 +33,8 @@
 	<main>
 		<Toasts />
 		<Header />
-		<slot />
+		<div class="mt-20">
+			<slot />
+		</div>
 	</main>
 {/if}
