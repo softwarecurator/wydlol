@@ -11,7 +11,12 @@
 </script>
 
 <script lang="ts">
+	import Timeline from '$lib/components/feed/timeline.svelte';
 	export let feed;
 </script>
 
-<div>feed here</div>
+<Timeline
+	continuation={feed.continuation}
+	activities={feed.activities}
+	contractAddr={feed.activities[0].collection.collectionId}
+/>
