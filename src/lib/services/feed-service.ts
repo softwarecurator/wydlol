@@ -16,3 +16,21 @@ export const getTrendingFeed = async (contractAddr, continuation = ''): Promise<
 	return trending;
 };
 
+export const myFeed = async (continuation = ''): Promise<any> => {
+	try {
+		console.log('here')
+		const data = await fetch(`/api/users/feed`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify(continuation)
+		});
+		const { feed } = await data.json();
+		console.log(feed)
+		return feed;
+	} catch(err) {
+		console.log(err)
+	}
+
+};

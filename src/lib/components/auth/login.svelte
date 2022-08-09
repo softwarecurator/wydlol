@@ -7,6 +7,7 @@
 	import { addToast } from '$lib/stores/toaster';
 	import SignIn from '$lib/components/modals/wallet-verify.svelte';
 	import { eagerConnect } from '$lib/stores/user';
+	import { goto } from '$app/navigation';
 
 	export let provider = null;
 	export let open = false;
@@ -73,6 +74,7 @@
 					signInOpen = false;
 					open = false;
 					eagerConnect.set('1');
+					goto('/feed');
 				} else {
 					throw new Error(msg);
 				}
