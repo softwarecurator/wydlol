@@ -25,7 +25,7 @@
 	export let collection;
 	export let nftMetadata;
 
-	let previousPage: string;
+	let previousPage = '/';
 	afterNavigate((navigaton) => {
 		previousPage = navigaton.from.pathname;
 	});
