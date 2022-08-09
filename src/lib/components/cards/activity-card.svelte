@@ -2,6 +2,7 @@
 	import { formatUsername } from '$lib/utilities/format-long-names';
 	import Time from 'svelte-time';
 	import * as blockies from 'blockies-ts';
+	import Image from '$lib/components/loaders/image-loader.svelte';
 
 	export let activity;
 	export let continuation;
@@ -52,19 +53,25 @@
 					{#if activity.type === 'sale'}
 						<div>
 							Sold
-							{activity.token.tokenName ? activity.token.tokenName : activity.token.tokenId} for
+							{activity.token.tokenName
+								? activity.token.tokenName
+								: formatUsername(activity.token.tokenId)} for
 							{activity.price} ETH
 						</div>
 					{:else if activity.type === 'ask'}
 						<div>
 							Listed
-							{activity.token.tokenName ? activity.token.tokenName : activity.token.tokenId} for
+							{activity.token.tokenName
+								? activity.token.tokenName
+								: formatUsername(activity.token.tokenId)} for
 							{activity.price} ETH
 						</div>
 					{:else}
 						<div>
 							Transfered
-							{activity.token.tokenName ? activity.token.tokenName : activity.token.tokenId} to
+							{activity.token.tokenName
+								? activity.token.tokenName
+								: formatUsername(activity.token.tokenId)} to
 							{formatUsername(activity.toAddress)}
 						</div>
 					{/if}
@@ -75,7 +82,7 @@
 			href={`/${activity.collection.collectionId}/${activity.token.tokenId}`}
 			class="hover:cursor-pointer"
 		>
-			<img src={activity.token.tokenImage} alt="token" class="hover:cursor-pointer" />
+			<Image src={activity.token.tokenImage} />
 		</a>
 	</div>
 </div>
