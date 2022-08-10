@@ -1,13 +1,29 @@
-<script context="module" lang="ts">
+<script lang="ts" context="module">
+	import type { Load } from '@sveltejs/kit';
 	import { myFeed } from '$lib/services/feed-service';
 
-	export async function load() {
-		return {
-			props: {
-				feed: await myFeed()
+	export const load: Load = async ({ fetch }) => {
+		const res = await fetch(`/api/users`, {
+			method: 'POST',
+			body: JSON.stringify('ME')
+		});
+		const { user } = await res.json();
+		if (user) {
+			if (user) {
+				return {
+					props: {
+						feed: await myFeed()
+					},
+					status: 302,
+					redirect: '/feed'
+				};
 			}
+		}
+		return {
+			status: 302,
+			redirect: '/trending'
 		};
-	}
+	};
 </script>
 
 <script lang="ts">
@@ -15,8 +31,13 @@
 	export let feed;
 </script>
 
-<Timeline
-	continuation={feed.continuation}
-	activities={feed.activities}
-	contractAddr={feed.activities[0].collection.collectionId}
-/>
+<div class="flex flex-col items-center justify-center">
+	<div class="">
+		<input type="text" placeholder="wyd lol?" class="h-12 w-full" />
+	</div>
+	<Timeline
+		continuation={feed.continuation}
+		activities={feed.activities}
+		contractAddr={feed.activities[0].collection.collectionId}
+	/>
+</div>
