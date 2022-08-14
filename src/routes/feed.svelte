@@ -9,19 +9,15 @@
 		});
 		const { user } = await res.json();
 		if (user) {
-			if (user) {
-				return {
-					props: {
-						feed: await myFeed()
-					},
-					status: 302,
-					redirect: '/feed'
-				};
-			}
+			return {
+				props: {
+					feed: await myFeed(user)
+				}
+			};
 		}
 		return {
 			status: 302,
-			redirect: '/trending'
+			redirect: '/'
 		};
 	};
 </script>
