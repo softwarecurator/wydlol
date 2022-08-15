@@ -54,6 +54,11 @@
 
 	async function login() {
 		let user = Moralis.User.current();
+		if (user && user.id == undefined) {
+			// Moralis is in a broken state. run logOut
+			Moralis.User.logOut();
+			user = false;
+		}
 		if (!user) {
 			try {
 				signInOpen = true;
