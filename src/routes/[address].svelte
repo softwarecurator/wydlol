@@ -58,14 +58,24 @@
 			</div>
 		</div>
 		<div class="flex grow flex-wrap">
-			{#each nfts as nft}
-				<div class="flex grow max-w-lg mb-5">
-					<div class="flex flex-col w-full items-start m-2">
-						<p>{nft.title}</p>
-						<img src={nft.media[0].gateway} alt="" />
-					</div>
+			<div class="px-1 py-4">
+				<div
+					class="grid justify-center gap-4 grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+				>
+					{#if nfts.length}
+						{#each nfts as nft}
+							<div class="flex grow max-w-lg mb-5">
+								<div class="flex flex-col w-full items-start m-2">
+									<p>{nft.title}</p>
+									<img src={nft.media[0].gateway} alt="" />
+								</div>
+							</div>
+						{/each}
+					{:else}
+						<div>no nfts losers</div>
+					{/if}
 				</div>
-			{/each}
+			</div>
 		</div>
 	{/await}
 </section>
