@@ -30,6 +30,7 @@
 <script>
 	import * as blockies from 'blockies-ts';
 	import { formatUsername } from '$lib/utilities/format-long-names';
+	import Image from '$lib/components/loaders/image-loader.svelte';
 
 	export let nftData;
 	export let user;
@@ -67,7 +68,7 @@
 							<div class="flex grow max-w-lg mb-5">
 								<div class="flex flex-col w-full items-start m-2">
 									<p>{nft.title}</p>
-									<img src={nft.media[0].gateway} alt="" />
+									<Image src={nft.media[0].gateway} />
 								</div>
 							</div>
 						{/each}

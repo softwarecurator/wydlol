@@ -30,11 +30,19 @@
 </svelte:head>
 
 {#if moralisStarted}
-	<main>
+	<div class="flex">
 		<Toasts />
 		<Header />
-		<div class="mt-20">
-			<slot />
+		<div class="mt-20 md:grid grid-cols-4 gap-4">
+			<div class="hidden md:block h-screen bg-gray-100 col-span-1 sticky top-20">
+				<div>
+					<h2>words</h2>
+					<p>words here</p>
+				</div>
+			</div>
+			<main class="col-span-3">
+				<slot />
+			</main>
 		</div>
-	</main>
+	</div>
 {/if}

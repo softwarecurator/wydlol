@@ -26,9 +26,7 @@
 {#if loaded}
 	<img class="h-full w-full object-contain" {src} {alt} />
 {:else if failed}
-	<div
-		class="flex flex-col items-center justify-center bg-gray-100 text-center w-[360px] h-[360px] md:w-[500px] md:h-[500px]"
-	>
+	<div class="flex flex-col items-center justify-center bg-gray-100 text-center">
 		<span
 			style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
 			><span

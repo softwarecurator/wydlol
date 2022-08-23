@@ -50,7 +50,7 @@
 				>
 			</div>
 		</div>
-		<h3>{nftMetadata.metadata.name}</h3>
+		<h2>{nftMetadata.metadata.name}</h2>
 		<img src={nftMetadata.media[0].gateway} alt="token" />
 	</div>
 </div>
