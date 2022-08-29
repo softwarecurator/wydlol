@@ -10,7 +10,9 @@ const config = {
 			postcss: true
 		})
 	],
-
+	commonjsOptions: {
+		transformMixedEsModules: true
+	},
 	kit: {
 		adapter: vercel()
 	}

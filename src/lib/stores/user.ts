@@ -1,6 +1,8 @@
 import { writable } from 'svelte/store';
-import { browser } from '$app/env';
-import { getMyProfile } from '../services/user-service';
+import { browser } from '$app/environment';
+import { Moralis } from 'moralis';
+import { getCookies } from '$lib/utilities/getCookies';
+import { env } from '$env/dynamic/public';
 
 const defaultValue = '';
 const initialValue = browser
@@ -17,14 +19,24 @@ eagerConnect.subscribe((value) => {
 	}
 });
 
-export const loadUsersProfile = async (): Promise<any> => {
-	const profileRes = await getMyProfile();
-	if(profileRes && profileRes.failed){
-		usersProfile.set(profileRes);
-	}
-	else{
-		usersProfile.set(null)
-	}
-	return profileRes;
-};
+export const isLoggedIn = async () => {
+    const cookies = getCookies();
 
+     Moralis.start({
+        serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
+        appId: env.PUBLIC_MORALIS_APP_ID
+    });
+
+		if (eagerConnect) {
+			if (cookies['wyd-user'] || cookies['wyd-session']) {
+				return {user: Moralis.User.current()};
+			} else {
+				// If cookies absent, reset me/eager-connect/Moralis;
+				Moralis.User.logOut();
+				eagerConnect.set('');
+				return {user: null};
+			}
+		} else {
+			return {user: null};
+		}
+}

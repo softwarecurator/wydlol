@@ -1,20 +1,30 @@
 <script context="module" lang="ts">
 	import '../app.postcss';
-	declare var Moralis: any;
 </script>
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { variables } from '$lib/utilities/variables';
+	import { env } from '$env/dynamic/public';
+	import { Moralis } from 'moralis';
 	import Toasts from '$lib/components/toasts/toasts.svelte';
-	import Header from './_header.svelte';
+	import Navbar from './(nav)/navbar.svelte';
+	import Sidebar from './(nav)/sidebar.svelte';
 
+	export let data;
 	let moralisStarted = false;
-	function configureMoralis() {
-		Moralis.start({ serverUrl: variables.serverUrl, appId: variables.appID });
+	$: profileOpen = false;
+	const configureMoralis = () => {
+		try {
+			Moralis.start({
+				serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
+				appId: env.PUBLIC_MORALIS_APP_ID
+			});
 
-		moralisStarted = true;
-	}
+			moralisStarted = true;
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	onMount(() => {
 		configureMoralis();
@@ -32,15 +42,10 @@
 {#if moralisStarted}
 	<div class="flex">
 		<Toasts />
-		<Header />
-		<div class="mt-20 md:grid grid-cols-4 gap-4">
-			<div class="hidden md:block h-screen bg-gray-100 col-span-1 sticky top-20">
-				<div>
-					<h2>words</h2>
-					<p>words here</p>
-				</div>
-			</div>
-			<main class="col-span-3">
+		<Sidebar bind:profileOpen user={data.user} />
+		<Navbar bind:profileOpen />
+		<div class="mt-20">
+			<main class="flex flex-col items-center justify-center w-screen">
 				<slot />
 			</main>
 		</div>
