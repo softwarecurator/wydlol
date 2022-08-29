@@ -1,34 +1,36 @@
 import { redirect } from '@sveltejs/kit';
 import { getCookies } from '$lib/utilities/getCookies';
-import { env } from '$env/dynamic/private'
-
+import { env } from '$env/dynamic/private';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ request, parent }) {
-    const cookies = getCookies(request);
-    if (cookies['wyd-user'] && cookies['wyd-session']) {
-        const { user } = await parent();
-       
-        const accounts = [];
+	const cookies = getCookies(request);
+	if (cookies['wyd-user'] && cookies['wyd-session']) {
+		const { user } = await parent();
 
-        accounts.push(`users=${user.get('accounts')[0]}`);
+		const accounts = [];
 
-        for (const addresses of user.get('following')) {
-            accounts.push(`&users=${addresses.wallet}`);
-        }
+		accounts.push(`users=${user.get('accounts')[0]}`);
 
-        const data = await fetch(`https://api.reservoir.tools/users/activity/v2?${accounts.join('')}&limit=20`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': env.RESERVIOR_KEY
-            }
-        });
+		for (const addresses of user.get('following')) {
+			accounts.push(`&users=${addresses.wallet}`);
+		}
 
-        const feed = await data.json();
+		const data = await fetch(
+			`https://api.reservoir.tools/users/activity/v2?${accounts.join('')}&limit=20`,
+			{
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+					'x-api-key': env.RESERVIOR_KEY
+				}
+			}
+		);
 
-        return feed;
-    }
+		const feed = await data.json();
 
-	throw redirect(307,  '/trending');
+		return feed;
+	}
+
+	throw redirect(307, '/trending');
 }

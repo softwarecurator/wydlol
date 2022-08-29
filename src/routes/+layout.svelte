@@ -14,16 +14,12 @@
 	let moralisStarted = false;
 	$: profileOpen = false;
 	const configureMoralis = () => {
-		try {
-			Moralis.start({
-				serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
-				appId: env.PUBLIC_MORALIS_APP_ID
-			});
+		Moralis.start({
+			serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
+			appId: env.PUBLIC_MORALIS_APP_ID
+		});
 
-			moralisStarted = true;
-		} catch (err) {
-			console.log(err);
-		}
+		moralisStarted = true;
 	};
 
 	onMount(() => {
