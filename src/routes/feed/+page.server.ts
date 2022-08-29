@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import { getCookies } from '$lib/utilities/getCookies';
-import { env } from '$env/dynamic/private';
+import { RESERVIOR_KEY } from '$env/static/private';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ request, parent }) {
@@ -17,12 +17,14 @@ export async function load({ request, parent }) {
 		}
 
 		const data = await fetch(
-			`https://api.reservoir.tools/users/activity/v2?${accounts.join('')}&limit=20`,
+			`https://api.reservoir.tools/users/activity/v2?${accounts.join(
+				''
+			)}&limit=15&types=sale&types=ask&types=mint`,
 			{
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
-					'x-api-key': env.RESERVIOR_KEY
+					'x-api-key': RESERVIOR_KEY
 				}
 			}
 		);
