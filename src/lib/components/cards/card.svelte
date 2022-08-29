@@ -5,24 +5,9 @@
 	import Image from '$lib/components/loaders/image-loader.svelte';
 
 	export let activity;
-	export let continuation;
-	export let getMore;
-	export let lastElement = false;
-
-	function actionWhenInViewport(e) {
-		if (lastElement) {
-			const observer = new IntersectionObserver(async (entries) => {
-				if (entries[0].isIntersecting) {
-					getMore(continuation); // execute code if thing is in view
-				}
-			});
-
-			observer.observe(e);
-		}
-	}
 </script>
 
-<div use:actionWhenInViewport class="flex grow max-w-lg mb-2 divide-y divide-black bg-slate-50">
+<div class="flex grow max-w-lg mb-2 divide-y divide-black bg-slate-50">
 	<div class="flex flex-col w-full items-start m-2">
 		<div class="flex flex-row items-start justify-start gap-2 my-2">
 			<div class="flex items-center justify-center h-full">

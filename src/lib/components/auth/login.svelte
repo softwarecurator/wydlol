@@ -1,12 +1,9 @@
-<script lang="ts" context="module">
-	declare var Moralis: any;
-</script>
-
 <script lang="ts">
 	import Cookies from 'js-cookie';
 	import { addToast } from '$lib/stores/toaster';
-	import SignIn from '$lib/components/modals/wallet-verify.svelte';
+	import SignIn from '$lib/components/modals/verify.svelte';
 	import { eagerConnect } from '$lib/stores/user';
+	import { Moralis } from 'moralis';
 	import { goto } from '$app/navigation';
 
 	export let provider = null;
@@ -23,13 +20,18 @@
 			);
 			let profile = await query.first();
 			if (!profile) {
+				// get ENS domain of an address
+				const options = { address };
+				const resolve = await Moralis.Web3API.resolve.resolveAddress(options);
 				const Profile = Moralis.Object.extend('Profile');
 				const newProfile = new Profile({
 					mainAddress: address,
-					username: address,
-					lower_username: address.toLowerCase(),
+					username: resolve.name ? resolve.name : address,
+					lower_username: resolve.name ? resolve.name.toLowerCase() : address.toLowerCase(),
 					accounts: [address],
 					lastScanned: new Date(),
+					following: [],
+					followers: [],
 					bio: ''
 				});
 				newProfile.set('user', user);
@@ -57,7 +59,7 @@
 		if (user && user.id == undefined) {
 			// Moralis is in a broken state. run logOut
 			Moralis.User.logOut();
-			user = false;
+			user = null;
 		}
 		if (!user) {
 			try {
@@ -68,7 +70,6 @@
 					signingMessage: 'thats crazy... sign this message tho'
 				});
 
-				console.log(user.get('ethAddress'));
 				//Setting Login Cookies
 				Cookies.set('wyd-session', user.get('sessionToken'), { secure: true });
 				Cookies.set('wyd-user', user.get('ethAddress'), { secure: true });

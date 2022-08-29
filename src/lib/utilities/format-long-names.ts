@@ -1,5 +1,6 @@
 export const formatUsername = (username: string) => {
 	if (!username) return;
+	if (username.includes('.eth')) return username;
 	if (username?.length < 12) return username;
 
 	return `${username.substring(0, 2)}...${username.substring(username.length - 4)}`;
