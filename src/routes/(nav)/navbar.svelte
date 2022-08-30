@@ -49,7 +49,7 @@
 		<div class="relative z-20">
 			<div class="flex items-center justify-between px-4 py-5">
 				<div>
-					<a href="/" class="text-4xl dark:text-white">wyd lol? 🙈</a>
+					<a href="/" class="text-2xl md:text-4xl dark:text-white">wyd lol? 🙈</a>
 				</div>
 				<div class="flex items-center justify-end gap-x-8">
 					<div class="flex items-center text-sm">
