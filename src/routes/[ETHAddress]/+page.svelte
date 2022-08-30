@@ -6,6 +6,14 @@
 	export let data;
 </script>
 
+<svelte:head>
+	<title>{formatUsername(data.user.username)} | wyd lol?</title>
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	<meta property="og:title" content="wydlolxyz" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://wydlolxyz.io" />
+</svelte:head>
+
 <section>
 	<div class="flex flex-row items-start justify-start gap-2 m-8">
 		<div class="flex items-center justify-center h-full">
@@ -30,9 +38,11 @@
 				{#if data.nfts.tokens.length}
 					{#each data.nfts.tokens as nft}
 						{#if nft.token.image}
-							<div class="flex grow max-w-lg mb-5">
+							<div
+								class="flex grow min-w-full max-w-lg mb-2 divide-y divide-black bg-slate-50 dark:bg-slate-800"
+							>
 								<div class="flex flex-col w-full items-start m-2">
-									<p>{nft.token.name}</p>
+									<p class="dark:text-white">{nft.token.name}</p>
 									<Image src={nft.token.image} />
 								</div>
 							</div>

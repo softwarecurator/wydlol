@@ -10,13 +10,14 @@
 	onMount(() => {
 		const img = new Image();
 		img.src = src;
+		console.log(src);
 		loading = true;
 
 		img.onload = () => {
 			loading = false;
 			loaded = true;
 		};
-		img.onerror = () => {
+		img.onerror = (e) => {
 			loading = false;
 			failed = true;
 		};
@@ -26,7 +27,7 @@
 {#if loaded}
 	<img class="h-full w-full object-contain" {src} {alt} />
 {:else if failed}
-	<div class="flex flex-col items-center justify-center bg-gray-100 text-center h-[500px]">
+	<div class="flex flex-col items-center justify-center bg-gray-100 text-center h-full w-full">
 		<span
 			style="box-sizing: border-box; display: inline-block; overflow: hidden; width: initial; height: initial; background: none; opacity: 1; border: 0px; margin: 0px; padding: 0px; position: relative; max-width: 100%;"
 			><span
@@ -50,6 +51,6 @@
 	</div>
 {:else if loading}
 	<div class="w-full p-2 flex items-center">
-		<div class="w-full h-44 bg-gray-400 animate-pulse" />
+		<div class="w-full h-[500px] bg-gray-400 animate-pulse" />
 	</div>
 {/if}

@@ -64,22 +64,18 @@
 								</button>
 								{#await me then data}
 									{#if data.user}
-										<div>
-											<div
-												class="inline-flex items-center justify-center gap-x-2"
-												on:click|stopPropagation={() => (profileOpen = !profileOpen)}
-											>
-												<div
-													class="h-10 w-10 object-cover border rounded-full cursor-pointer flex-shrink-0"
-												>
-													<img
-														alt="me"
-														class="rounded-full w-full h-auto"
-														src={blockies
-															.create({ seed: data.user.get('ethAddress').toLowerCase() })
-															.toDataURL()}
-													/>
-												</div>
+										<div
+											class="inline-flex items-center border-2 border-black dark:border-slate-600 p-2 justify-center gap-x-2 "
+											on:click|stopPropagation={() => (profileOpen = !profileOpen)}
+										>
+											<div class="h-10 w-10 object-cover rounded-full cursor-pointer flex-shrink-0">
+												<img
+													alt="me"
+													class="rounded-full w-full h-auto"
+													src={blockies
+														.create({ seed: data.user.get('ethAddress').toLowerCase() })
+														.toDataURL()}
+												/>
 											</div>
 										</div>
 									{:else}
