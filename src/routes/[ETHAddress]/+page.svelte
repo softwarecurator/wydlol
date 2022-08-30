@@ -29,12 +29,14 @@
 			>
 				{#if data.nfts.tokens.length}
 					{#each data.nfts.tokens as nft}
-						<div class="flex grow max-w-lg mb-5">
-							<div class="flex flex-col w-full items-start m-2">
-								<p>{nft.token.name}</p>
-								<Image src={nft.token.image} />
+						{#if nft.token.image}
+							<div class="flex grow max-w-lg mb-5">
+								<div class="flex flex-col w-full items-start m-2">
+									<p>{nft.token.name}</p>
+									<Image src={nft.token.image} />
+								</div>
 							</div>
-						</div>
+						{/if}
 					{/each}
 				{:else}
 					<div>no nfts losers</div>

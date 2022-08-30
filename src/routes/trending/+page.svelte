@@ -13,7 +13,7 @@
 	}
 </script>
 
-<h2 class="text-center text-xl md:text-3xl mb-4 flex items-center justify-center">
+<h2 class="text-center text-xl md:text-3xl mb-4 flex items-center justify-center dark:text-white">
 	<div class="mx-2 flex items-center justify-center h-full">
 		<img
 			class="rounded-full w-14 h-14 md:w-10 md:h-10 m-2 md:m-0"
@@ -21,7 +21,7 @@
 			alt=""
 		/>
 	</div>
-	<select bind:value={contractAddress}>
+	<select bind:value={contractAddress} class="dark:text-black">
 		<option selected value={contractAddress}
 			>{trending.activities[0].collection.collectionName}</option
 		>

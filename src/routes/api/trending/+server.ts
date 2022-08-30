@@ -5,9 +5,9 @@ import { RESERVIOR_KEY } from '$env/static/private';
 export async function GET({ url }) {
 	try {
         const contract = url.searchParams.get('contract');
-
+        
 		const data = await fetch(
-            `https://api.reservoir.tools/collections/${contract}/activity/v1?limit=20&types=sale&types=ask&types=mint`,
+            `https://api.reservoir.tools/collections/${contract}/activity/v1?limit=20&types=sale`,
             {
                 method: 'GET',
                 headers: {

@@ -36,7 +36,7 @@
 </svelte:head>
 
 {#if moralisStarted}
-	<div class="flex">
+	<div class="flex dark:bg-slate-900">
 		<Toasts />
 		<Sidebar bind:profileOpen user={data.user} />
 		<Navbar bind:profileOpen />

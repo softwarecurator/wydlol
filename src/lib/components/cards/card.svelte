@@ -7,7 +7,7 @@
 	export let activity;
 </script>
 
-<div class="flex grow max-w-lg mb-2 divide-y divide-black bg-slate-50">
+<div class="flex grow min-w-full max-w-lg mb-2 divide-y divide-black bg-slate-50 dark:bg-slate-800">
 	<div class="flex flex-col w-full items-start m-2">
 		<div class="flex flex-row items-start justify-start gap-2 my-2">
 			<div class="flex items-center justify-center h-full">
@@ -19,8 +19,11 @@
 			</div>
 
 			<div class="flex flex-col">
-				<div class="text-sm gap-1 flex">
-					<a class="flex items-center text-slate-600" href={`/${activity.fromAddress}`}>
+				<div class="text-sm gap-1 flex dark:text-slate-400">
+					<a
+						class="flex items-center text-slate-600 dark:text-white"
+						href={`/${activity.fromAddress}`}
+					>
 						<p>{formatUsername(activity.fromAddress)}</p>
 					</a>
 					<div>
@@ -33,7 +36,7 @@
 				</div>
 				<a
 					href={`/${activity.collection.collectionId}/${activity.token.tokenId}`}
-					class=" flex flex-col items-start gap-4 hover:underline hover:cursor-pointer"
+					class=" flex flex-col items-start gap-4 hover:underline hover:cursor-pointer dark:text-gray-300 "
 				>
 					{#if activity.type === 'sale'}
 						<div>
@@ -65,7 +68,7 @@
 		</div>
 		<a
 			href={`/${activity.collection.collectionId}/${activity.token.tokenId}`}
-			class="hover:cursor-pointer"
+			class="hover:cursor-pointer h-full w-full object-contain"
 		>
 			<Image src={activity.token.tokenImage} />
 		</a>
