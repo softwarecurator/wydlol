@@ -27,15 +27,8 @@ export const isLoggedIn = async () => {
 		appId: env.PUBLIC_MORALIS_APP_ID
 	});
 
-	if (eagerConnect) {
-		if (cookies['wyd-user'] || cookies['wyd-session']) {
-			return { user: Moralis.User.current() };
-		} else {
-			// If cookies absent, reset me/eager-connect/Moralis;
-			Moralis.User.logOut();
-			eagerConnect.set('');
-			return { user: null };
-		}
+	if (cookies['wyd-user'] || cookies['wyd-session']) {
+		return { user: Moralis.User.current() };
 	} else {
 		return { user: null };
 	}
