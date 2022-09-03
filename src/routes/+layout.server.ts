@@ -11,8 +11,9 @@ export async function load({ request }) {
 			serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
 			appId: env.PUBLIC_MORALIS_APP_ID
 		});
+
 		const user = await new Moralis.Query(Moralis.Object.extend('Profile'))
-			.containedIn('accounts', [lower])
+			.equalTo('mainAddress', lower)
 			.first();
 
 		return { user };
