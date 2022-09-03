@@ -3,6 +3,7 @@
 	import { isLoggedIn, eagerConnect } from '$lib/stores/user';
 	import * as blockies from 'blockies-ts';
 	import { Icon, Moon, Sun } from 'svelte-hero-icons';
+	import { usersProfile } from '$lib/stores/user';
 
 	$: open = false;
 	$: isDark = true;
@@ -20,14 +21,10 @@
 	};
 
 	export let profileOpen;
-	$: me = isLoggedIn();
+
 	$: openModal = () => {
 		open = !open;
 	};
-
-	eagerConnect.subscribe(() => {
-		me = isLoggedIn();
-	});
 
 	$: {
 		if (
@@ -62,33 +59,32 @@
 										<Icon src={Moon} solid class="h-6 text-black w-6" />
 									{/if}
 								</button>
-								{#await me then data}
-									{#if data.user}
+
+								{#if $usersProfile}
+									<div
+										class="inline-flex items-center border-2 border-black dark:border-slate-600 p-2 justify-center gap-x-2 "
+										on:click|stopPropagation={() => (profileOpen = !profileOpen)}
+									>
+										<div class="h-10 w-10 object-cover rounded-full cursor-pointer flex-shrink-0">
+											<img
+												alt="me"
+												class="rounded-full w-full h-auto"
+												src={blockies
+													.create({ seed: $usersProfile.mainAddress.toLowerCase() })
+													.toDataURL()}
+											/>
+										</div>
+									</div>
+								{:else}
+									<div class="flex items-center">
 										<div
-											class="inline-flex items-center border-2 border-black dark:border-slate-600 p-2 justify-center gap-x-2 "
-											on:click|stopPropagation={() => (profileOpen = !profileOpen)}
+											on:click|stopPropagation={openModal}
+											class="cursor-pointer bg-black text-white dark:text-black dark:bg-white btn-cta"
 										>
-											<div class="h-10 w-10 object-cover rounded-full cursor-pointer flex-shrink-0">
-												<img
-													alt="me"
-													class="rounded-full w-full h-auto"
-													src={blockies
-														.create({ seed: data.user.get('ethAddress').toLowerCase() })
-														.toDataURL()}
-												/>
-											</div>
+											CONNECT WALLET
 										</div>
-									{:else}
-										<div class="flex items-center">
-											<div
-												on:click|stopPropagation={openModal}
-												class="cursor-pointer bg-black text-white dark:text-black dark:bg-white btn-cta"
-											>
-												CONNECT WALLET
-											</div>
-										</div>
-									{/if}
-								{/await}
+									</div>
+								{/if}
 							</div>
 						</div>
 					</div>
