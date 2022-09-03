@@ -10,11 +10,7 @@ export async function load({ request, parent }) {
 
 		const accounts = [];
 
-		accounts.push(`users=${user.get('accounts')[0]}`);
-
-		for (const addresses of user.get('following')) {
-			accounts.push(`&users=${addresses.wallet}`);
-		}
+		accounts.push(`users=${user.get('mainAddress')}`);
 
 		const data = await fetch(
 			`https://api.reservoir.tools/users/activity/v2?${accounts.join(
