@@ -9,6 +9,7 @@
 	import Toasts from '$lib/components/toasts/toasts.svelte';
 	import Navbar from './(nav)/navbar.svelte';
 	import Sidebar from './(nav)/sidebar.svelte';
+	import { init } from '$lib/stores/web3';
 
 	export let data;
 	let moralisStarted = false;
@@ -24,6 +25,7 @@
 
 	onMount(() => {
 		configureMoralis();
+		init();
 	});
 </script>
 
