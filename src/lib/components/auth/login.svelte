@@ -30,8 +30,6 @@
 					lower_username: resolve.name ? resolve.name.toLowerCase() : address.toLowerCase(),
 					accounts: [address],
 					lastScanned: new Date(),
-					following: [],
-					followers: [],
 					bio: ''
 				});
 				newProfile.set('user', user);
