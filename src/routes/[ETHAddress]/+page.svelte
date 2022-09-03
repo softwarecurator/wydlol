@@ -2,6 +2,7 @@
 	import * as blockies from 'blockies-ts';
 	import { formatUsername } from '$lib/utilities/format-long-names';
 	import Image from '$lib/components/loaders/image-loader.svelte';
+	import Verify from '$lib/components/misc/verify.svelte';
 
 	export let data;
 </script>
@@ -11,22 +12,23 @@
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 	<meta property="og:title" content="wydlolxyz" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://wydlolxyz.io" />
+	<meta property="og:url" content="https://wydlol.xyz" />
 </svelte:head>
 
 <section>
 	<div class="flex flex-row items-start justify-start gap-2 m-8">
 		<div class="flex items-center justify-center h-full">
 			<img
-				class="rounded-full w-36 h-36 m-2 md:m-0"
+				class="rounded-full w-24 h-24 md:w-36 md:h-36 m-2 md:m-0"
 				src={blockies.create({ seed: data.user.mainAddress.toLowerCase() }).toDataURL()}
 				alt=""
 			/>
 		</div>
 
 		<div class="flex flex-col">
-			<div class="text-4xl gap-1 flex">
-				<p>{formatUsername(data.user.username)}</p>
+			<div class="gap-1 flex items-center dark:text-white">
+				<p class="text-lg md:text-4xl">{formatUsername(data.user.username)}</p>
+				<Verify isVerified={true} size="large" />
 			</div>
 		</div>
 	</div>
