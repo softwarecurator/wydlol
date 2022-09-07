@@ -35,24 +35,39 @@
 						relative
 					/>
 				</p>
-
-				<div>
-					<div>
-						<div class="flex items-start justify-start mt-4 gap-4">
+				<div class="flex items-center justify-around">
+					<div class="flex items-start justify-start flex-col md:flex-row mt-4 md:gap-4">
+						<img
+							class="rounded-full w-8 h-8 m-2 md:m-0"
+							src={blockies.create({ seed: transaction.fromAddress.toLowerCase() }).toDataURL()}
+							alt=""
+						/>
+						<div class="flex flex-col items-start dark:text-slate-400">
+							From
+							{#await showENS(transaction.fromAddress)}
+								<p>{formatUsername(transaction.fromAddress)}</p>
+							{:then ENS}
+								<p>{formatUsername(ENS)}</p>
+							{/await}
+						</div>
+					</div>
+					{#if transaction.type === 'sale'}
+						<div class="flex items-start justify-start flex-col md:flex-row mt-4 md:gap-4">
 							<img
 								class="rounded-full w-8 h-8 m-2 md:m-0"
-								src={blockies.create({ seed: transaction.fromAddress.toLowerCase() }).toDataURL()}
+								src={blockies.create({ seed: transaction?.toAddress.toLowerCase() }).toDataURL()}
 								alt=""
 							/>
-							<div class="flex flex-col items-start">
-								{#await showENS(transaction.fromAddress)}
-									<p class="dark:text-slate-400">{formatUsername(transaction.fromAddress)}</p>
+							<div class="flex flex-col items-start dark:text-slate-400">
+								To
+								{#await showENS(transaction?.toAddress)}
+									<p>{formatUsername(transaction?.toAddress)}</p>
 								{:then ENS}
-									<p class="dark:text-slate-400">{formatUsername(ENS)}</p>
+									<p>{formatUsername(ENS)}</p>
 								{/await}
 							</div>
 						</div>
-					</div>
+					{/if}
 				</div>
 			</div>
 		{/each}
