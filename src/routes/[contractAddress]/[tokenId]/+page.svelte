@@ -22,6 +22,15 @@
 	const addressORENS = showENS(data.token.owner);
 </script>
 
+<svelte:head>
+	<title>{formatUsername(data.token.name)} | wyd lol?</title>
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+	<meta property="og:title" content="wydlolxyz" />
+	<meta property="og:type" content="website" />
+	<meta property="og:url" content="https://wydlol.xyz" />
+	<meta property="og:image" content={data.token.image} />
+</svelte:head>
+
 <section class="flex flex-col items-start w-auto mx-12">
 	<div class="m-2 flex flex-row items-center justify-center h-full">
 		<img
