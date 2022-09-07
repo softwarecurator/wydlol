@@ -1,4 +1,3 @@
-import { error } from '@sveltejs/kit';
 import { env } from '$env/dynamic/private';
 
 /** @type {import('./$types').PageServerLoad} */
@@ -29,7 +28,8 @@ export async function load({ params }) {
 		return {
             token,
             marketData,
-            transactionsData
+            transactionsData,
+            image: token.image
         };
 
 }

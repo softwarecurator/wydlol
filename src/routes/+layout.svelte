@@ -10,6 +10,7 @@
 	import Navbar from './(nav)/navbar.svelte';
 	import Sidebar from './(nav)/sidebar.svelte';
 	import { init } from '$lib/stores/web3';
+	import { page } from '$app/stores';
 
 	export let data;
 	let moralisStarted = false;
@@ -35,6 +36,7 @@
 	<meta property="og:title" content="wydlol" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://wydlol.xyz" />
+	<meta property="og:image" content={$page.data.image} />
 </svelte:head>
 
 {#if moralisStarted}
