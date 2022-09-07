@@ -10,7 +10,6 @@
 	onMount(() => {
 		const img = new Image();
 		img.src = src;
-		console.log(src);
 		loading = true;
 
 		img.onload = () => {
