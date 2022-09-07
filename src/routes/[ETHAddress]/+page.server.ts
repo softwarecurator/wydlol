@@ -6,7 +6,7 @@ import { validateInputAddresses } from '$lib/utilities/isETHAddress';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params, parent }) {
-	const { image, title } = await parent();
+	const { image } = await parent();
 	Moralis.start({
 		serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
 		appId: env.PUBLIC_MORALIS_APP_ID
