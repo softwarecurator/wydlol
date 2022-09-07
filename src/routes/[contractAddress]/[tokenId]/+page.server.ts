@@ -2,8 +2,6 @@ import { env } from '$env/dynamic/private';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-
-
 		const data = await fetch(`https://api.reservoir.tools/tokens/v5?tokens=${params.contractAddress}%3A${params.tokenId}&sortBy=tokenId&limit=1&includeTopBid=true&includeAttributes=true`, {
 			method: 'GET',
 			headers: {

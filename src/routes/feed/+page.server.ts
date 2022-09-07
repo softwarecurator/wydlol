@@ -7,7 +7,6 @@ export async function load({ request, parent }) {
 	const cookies = getCookies(request);
 	if (cookies['wyd-user'] && cookies['wyd-session']) {
 		const { user } = await parent();
-
 		const accounts = [];
 
 		accounts.push(`users=${user.get('mainAddress')}`);

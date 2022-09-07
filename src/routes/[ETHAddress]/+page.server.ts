@@ -1,10 +1,16 @@
 import { error } from '@sveltejs/kit';
-import { env } from '$env/dynamic/private';
+import { env } from '$env/dynamic/public';
+import { RESERVIOR_KEY } from '$env/static/private';
 import Moralis from 'moralis/node';
 import { validateInputAddresses } from '$lib/utilities/isETHAddress';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ params }) {
+export async function load({ params, parent }) {
+	const { image, title } = await parent();
+	Moralis.start({
+		serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
+		appId: env.PUBLIC_MORALIS_APP_ID
+	});
 	const user = await new Moralis.Query(Moralis.Object.extend('Profile'))
 		.equalTo('lower_username', params.ETHAddress.toLowerCase())
 		.first();
@@ -16,7 +22,7 @@ export async function load({ params }) {
 					method: 'GET',
 					headers: {
 						'Content-Type': 'application/json',
-						'x-api-key': env.RESERVIOR_KEY
+						'x-api-key': RESERVIOR_KEY
 					}
 				}
 			);
@@ -25,7 +31,9 @@ export async function load({ params }) {
 
 			return {
 				user,
-				nfts
+				nfts,
+				title: params.ETHAddress,
+				image
 			};
 		}
 
@@ -33,7 +41,7 @@ export async function load({ params }) {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
-				'x-api-key': env.RESERVIOR_KEY
+				'x-api-key': RESERVIOR_KEY
 			}
 		});
 
@@ -41,7 +49,9 @@ export async function load({ params }) {
 
 		return {
 			user: { mainAddress: params.ETHAddress, username: params.ETHAddress },
-			nfts
+			nfts,
+			image,
+			title: params.ETHAddress,
 		};
 	}
 

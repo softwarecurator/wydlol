@@ -7,14 +7,6 @@
 	export let data;
 </script>
 
-<svelte:head>
-	<title>{formatUsername(data.user.username)} | wyd lol?</title>
-	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-	<meta property="og:title" content="wydlolxyz" />
-	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://wydlol.xyz" />
-</svelte:head>
-
 <section>
 	<div class="flex flex-row items-start justify-start gap-2 m-8">
 		<div class="flex items-center justify-center h-full">
