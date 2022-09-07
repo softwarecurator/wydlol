@@ -4,7 +4,7 @@
 	import Time from 'svelte-time';
 	import Image from '$lib/components/loaders/image-loader.svelte';
 	import Attributes from './(components)/attributes.svelte';
-	import { Moralis } from 'moralis';
+	import Moralis from '$lib/utilities/moralisPkg';
 
 	export let data;
 
