@@ -40,6 +40,7 @@
 	<meta property="og:image:height" content="675" />
 	<meta property="og:image:width" content="1200" />
 	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:image" content={$page.data.image} />
 	<meta name="twitter:site" content="https://twitter.com/wydlolxyz" />
 	<meta name="twitter:creator" content="@wydlolxyz" />
 </svelte:head>
