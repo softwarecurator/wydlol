@@ -35,10 +35,6 @@
 	<meta property="og:title" content="wydlol" />
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://wydlol.xyz" />
-	<meta
-		property="og:image"
-		content="https://i.kym-cdn.com/entries/icons/mobile/000/021/885/keyboardkey.jpg"
-	/>
 </svelte:head>
 
 {#if moralisStarted}

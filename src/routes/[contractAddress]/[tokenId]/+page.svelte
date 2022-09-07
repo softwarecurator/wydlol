@@ -24,7 +24,6 @@
 
 <svelte:head>
 	<title>{data.token.name} | {data.token.collection.name}</title>
-	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 	<meta property="og:title" content={data.token.name} />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="https://twitter.com/wydlolxyz" />
