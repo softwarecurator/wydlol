@@ -26,9 +26,13 @@
 	<title>{data.token.name} | {data.token.collection.name}</title>
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 	<meta property="og:title" content={data.token.name} />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="https://twitter.com/wydlolxyz" />
+	<meta name="twitter:creator" content="@wydlolxyz" />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://wydlol.xyz" />
 	<meta property="og:image" content={data.token.image} />
+	<meta property="og:image:height" content="675" />
+	<meta property="og:image:width" content="1200" />
 </svelte:head>
 
 <section class="flex flex-col items-start w-auto mx-12">
