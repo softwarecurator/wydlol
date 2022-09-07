@@ -33,7 +33,7 @@
 						<div class="rounded-def bg-black px-6 py-5 space-y-[1px]">
 							<Login bind:open>
 								<div
-									class="border uppercase cursor-pointer border-grey5 rounded-def bg-grey4 w-full text-center text-white py-1 flex items-center justify-start px-5 gap-x-3"
+									class="border uppercase cursor-pointer border-grey5 rounded-def bg-grey4 w-full text-center text-white py-1 hidden md:flex items-center justify-start px-5 gap-x-3"
 								>
 									<img
 										src="/images/icons/metamask.svg"

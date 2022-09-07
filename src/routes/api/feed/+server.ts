@@ -4,7 +4,7 @@ import { env } from '$env/dynamic/private';
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request }) {
 	try {
-		let user = await request.json();
+		const user = await request.json();
 
 		if (!user) {
 			return error(400, 'User not logged in.');
