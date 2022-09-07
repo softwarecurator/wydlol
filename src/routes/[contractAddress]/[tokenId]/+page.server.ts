@@ -29,7 +29,8 @@ export async function load({ params }) {
             token,
             marketData,
             transactionsData,
-            image: token.image
+            image: token.image,
+            title: `${token.name}`
         };
 
 }

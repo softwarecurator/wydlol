@@ -31,12 +31,17 @@
 </script>
 
 <svelte:head>
-	<title>wyd lol?</title>
+	<title>{$page.data.title}| wyd lol?</title>
 	<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-	<meta property="og:title" content="wydlol" />
+	<meta property="og:title" content={`${$page.data.title}| wyd lol?`} />
 	<meta property="og:type" content="website" />
-	<meta property="og:url" content="https://wydlol.xyz" />
+	<meta property="og:url" content={$page.url.href} />
 	<meta property="og:image" content={$page.data.image} />
+	<meta property="og:image:height" content="675" />
+	<meta property="og:image:width" content="1200" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:site" content="https://twitter.com/wydlolxyz" />
+	<meta name="twitter:creator" content="@wydlolxyz" />
 </svelte:head>
 
 {#if moralisStarted}
