@@ -5,6 +5,7 @@
 	import Image from '$lib/components/loaders/image-loader.svelte';
 	import Attributes from './(components)/attributes.svelte';
 	import Moralis from '$lib/utilities/moralisPkg';
+	import Transactions from './(components)/transactions.svelte';
 
 	export let data;
 
@@ -38,6 +39,9 @@
 		</div>
 		<div class="md:ml-12 flex flex-col">
 			<h1 class="text-xl md:text-4xl dark:text-white">{data.token.name}</h1>
+			<p class="text-base my-8 dark:text-slate-400">
+				{data.token.description ? data.token.description : ''}
+			</p>
 			<p class="dark:text-slate-400">
 				Last Sale Price: {data.token.lastSell.value} ETH · <Time
 					timestamp={new Date(data.token.lastSell.timestamp * 1000)}
@@ -64,6 +68,7 @@
 					</div>
 				</div>
 			</div>
+			<Transactions transactions={data.transactionsData} />
 			<Attributes attributes={data.token.attributes} />
 		</div>
 	</div>

@@ -13,12 +13,23 @@ export async function load({ params }) {
 			}
 		});
 
+        const transactions = await fetch(`https://api.reservoir.tools/tokens/${params.contractAddress}%3A${params.tokenId}/activity/v2?limit=5&sortBy=eventTimestamp`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				'x-api-key': env.RESERVIOR_KEY
+			}
+		});
+
+
+        const transactionsData = await transactions.json();
         const nftData = await data.json();
         const token = nftData.tokens[0].token;
         const marketData = nftData.tokens[0].market;
 		return {
             token,
-            marketData
+            marketData,
+            transactionsData
         };
 
 }
