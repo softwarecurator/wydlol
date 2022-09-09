@@ -41,48 +41,50 @@
 {#await me then data}
 	{#if $usersProfile && data.user}
 		<aside
-			class="h-screen drop-shadow-2xl fixed z-40 top-0 right-0 left-0 bottom-0 transform ease-in-out transition-all overflow-auto duration-300 translate-x-full"
+			class="h-screen fixed z-40 top-0 right-0 left-0 bottom-0 transform ease-in-out transition-all overflow-hidden duration-300 translate-x-full"
 			on:click={() => (profileOpen = !profileOpen)}
 			class:profileOpen
 		>
+			<div
+				class="h-screen w-screen backdrop-blur-md overflow-hidden fixed z-30 top-0 right-0 left-0 bottom-0"
+			/>
 			<nav
 				on:click|stopPropagation={() => null}
-				class="bg-white h-full max-w-md min-w-[20rem] fixed flex flex-col overflow-auto z-50 items-start top-0 right-0 justify-start w-10/12 md:w-1/5"
+				class="bg-slate-100 dark:bg-zinc-900  h-full max-w-md min-w-[20rem] fixed flex flex-col overflow-hidden z-50 items-start top-0 right-0 justify-start w-10/12 md:w-1/5"
 			>
-				<div class="flex items-center justify-between w-full bg-black p-6 text-gray-200">
-					<a href="/" class="text-2xl">wyd lol? 🙈</a>
+				<div class="flex items-center justify-end w-full p-6 text-gray-200">
 					<div class="text-gray-200 cursor-pointer" on:click={() => (profileOpen = !profileOpen)}>
 						<Fa icon={faTimes} scale={1.5} />
 					</div>
 				</div>
-				<div class="flex h-48 relative w-full">
-					<div class="h-full w-full bg-gradient-to-rbg-black" />
-				</div>
+				<div class="flex h-12 relative w-full" />
 				<div class="w-full flex items-center justify-center flex-col relative z-50 -mt-10">
-					<img
-						alt="me"
-						class="w-20 rounded-full"
-						src={blockies.create({ seed: data.user.get('ethAddress').toLowerCase() }).toDataURL()}
-					/>
+					<div class="flex flex-row justify-center items-center gap-4">
+						<img
+							alt="me"
+							class="w-12 rounded-full"
+							src={blockies.create({ seed: data.user.get('ethAddress').toLowerCase() }).toDataURL()}
+						/>
 
-					<h1 class="text-md mt-4 text-black text-xl">
-						{formatUsername($usersProfile.username)}
-					</h1>
+						<h1 class="text-sm text-black dark:text-white md:text-xl">
+							{formatUsername($usersProfile.username)}
+						</h1>
+					</div>
 
 					<a
 						sveltekit:prefetch
 						on:click={() => (profileOpen = !profileOpen)}
-						class="flex items-center justify-center w-1/3 p-3 bg-inherit rounded-full border-2 border-solid border-black px-2 py-1.5  text-black mt-4"
+						class="flex items-center justify-center w-full border-2 border-solid border-zinc-900 p-4 text-black dark:text-white mt-4 dark:bg-zinc-700"
 						href={`/${$usersProfile.username}`}
 					>
 						Profile
 						<Fa icon={faUserAlt} scale={1} class="block h-full ml-2" />
 					</a>
 					<div class="flex items-center justify-between w-11/12 mt-4">
-						<div class="flex items-center justify-center text-black">
+						<div class="flex items-center justify-center text-black dark:text-white">
 							<div class="flex items-center justify-center">Your Wallet</div>
 						</div>
-						<div class="flex items-start justify-start bg-black mb-px">
+						<div class="flex items-start justify-start bg-black dark:bg-zinc-800 mb-px">
 							<div
 								class:copied
 								on:click={() => {
@@ -111,10 +113,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="flex justify-center items-end w-full h-full pt-10">
+				<div class="flex justify-center items-center w-full mt-10">
 					<div
 						on:click={disconnect}
-						class="cursor-pointer flex items-center justify-center p-4 bg-red-700 text-gray-200 w-full"
+						class="cursor-pointer flex items-center justify-center p-4 border-2 border-solid border-black text-black dark:text-gray-200 w-full"
 					>
 						<p>Disconnect</p>
 					</div>
@@ -126,7 +128,7 @@
 
 <style lang="postcss">
 	.profileOpen {
-		@apply backdrop-blur-md translate-x-0;
+		@apply translate-x-0;
 	}
 
 	.copied {

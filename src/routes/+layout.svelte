@@ -45,6 +45,13 @@
 	<meta name="twitter:image" content={$page.data.image} />
 	<meta name="twitter:site" content="https://twitter.com/wydlolxyz" />
 	<meta name="twitter:creator" content="@wydlolxyz" />
+	{#if profileOpen}
+		<style>
+			body {
+				overflow: hidden;
+			}
+		</style>
+	{/if}
 </svelte:head>
 
 <svelte:window bind:innerWidth={windowWidth} />
