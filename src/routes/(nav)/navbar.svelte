@@ -2,6 +2,8 @@
 	import WalletModal from '$lib/components/modals/wallets.svelte';
 	import * as blockies from 'blockies-ts';
 	import { Icon, Moon, Sun } from 'svelte-hero-icons';
+	import Fa from 'svelte-fa/src/fa.svelte';
+	import { faWallet } from '@fortawesome/free-solid-svg-icons';
 	import { usersProfile } from '$lib/stores/user';
 
 	$: open = false;
@@ -75,13 +77,11 @@
 										</div>
 									</div>
 								{:else}
-									<div class="flex items-center">
-										<div
-											on:click|stopPropagation={openModal}
-											class="cursor-pointer bg-black text-white dark:text-black dark:bg-white btn-cta"
-										>
-											CONNECT WALLET
-										</div>
+									<div
+										on:click|stopPropagation={openModal}
+										class="cursor-pointer border-2 border-solid border-zinc-400 rounded-full p-3 text-black dark:text-white md:mr-4 md:ml-4"
+									>
+										<Fa icon={faWallet} scale={1} />
 									</div>
 								{/if}
 							</div>
