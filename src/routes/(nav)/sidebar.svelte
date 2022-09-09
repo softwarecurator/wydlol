@@ -1,22 +1,20 @@
 <script lang="ts">
-	import { isLoggedIn, eagerConnect } from '$lib/stores/user';
+	import { isLoggedIn, eagerConnect, usersProfile } from '$lib/stores/user';
 	import * as blockies from 'blockies-ts';
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import Cookies from 'js-cookie';
 	import { faTimes, faCopy, faLink, faUserAlt } from '@fortawesome/free-solid-svg-icons';
 	import { formatUsername } from '$lib/utilities/format-long-names';
-	import { Moralis } from 'moralis';
+	import Moralis from '$lib/utilities/moralisPkg';
 	import { goto } from '$app/navigation';
 
 	$: me = isLoggedIn();
 
-	eagerConnect.subscribe(() => {
-		me = isLoggedIn();
-	});
-
 	const disconnect = async () => {
 		await Moralis.User.logOut();
-		eagerConnect.set('');
+		eagerConnect.set(null);
+		usersProfile.set(null);
+		me = null;
 		Cookies.remove('wyd-session');
 		Cookies.remove('wyd-user');
 		profileOpen = !profileOpen;
@@ -32,11 +30,16 @@
 
 	let copied = false;
 	export let profileOpen = false;
-	export let user;
+
+	$: {
+		if ($eagerConnect) {
+			me = isLoggedIn();
+		}
+	}
 </script>
 
 {#await me then data}
-	{#if data.user}
+	{#if $usersProfile && data.user}
 		<aside
 			class="h-screen drop-shadow-2xl fixed z-40 top-0 right-0 left-0 bottom-0 transform ease-in-out transition-all overflow-auto duration-300 translate-x-full"
 			on:click={() => (profileOpen = !profileOpen)}
@@ -63,14 +66,14 @@
 					/>
 
 					<h1 class="text-md mt-4 text-black text-xl">
-						{formatUsername(user.username)}
+						{formatUsername($usersProfile.username)}
 					</h1>
 
 					<a
 						sveltekit:prefetch
 						on:click={() => (profileOpen = !profileOpen)}
 						class="flex items-center justify-center w-1/3 p-3 bg-inherit rounded-full border-2 border-solid border-black px-2 py-1.5  text-black mt-4"
-						href={`/${user.username}`}
+						href={`/${$usersProfile.username}`}
 					>
 						Profile
 						<Fa icon={faUserAlt} scale={1} class="block h-full ml-2" />

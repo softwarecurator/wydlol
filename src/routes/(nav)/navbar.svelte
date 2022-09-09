@@ -1,6 +1,5 @@
 <script lang="ts">
 	import WalletModal from '$lib/components/modals/wallets.svelte';
-	import { isLoggedIn, eagerConnect } from '$lib/stores/user';
 	import * as blockies from 'blockies-ts';
 	import { Icon, Moon, Sun } from 'svelte-hero-icons';
 	import { usersProfile } from '$lib/stores/user';
