@@ -64,7 +64,7 @@
 		<Toasts />
 		<Sidebar bind:profileOpen />
 		<Navbar bind:profileOpen bind:resultsClosed />
-		<div class="mt-20">
+		<div class="mt-20 mb-16">
 			<main class="flex flex-col items-center justify-center w-screen">
 				<slot />
 			</main>
