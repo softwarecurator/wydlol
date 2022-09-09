@@ -2,8 +2,9 @@
 	import Cookies from 'js-cookie';
 	import { addToast } from '$lib/stores/toaster';
 	import SignIn from '$lib/components/modals/verify.svelte';
-	import { eagerConnect } from '$lib/stores/user';
+	import { eagerConnect, usersProfile } from '$lib/stores/user';
 	import { Moralis } from 'moralis';
+	import { selectedAccount } from '$lib/stores/web3';
 	import { goto } from '$app/navigation';
 
 	export let provider = null;
@@ -34,12 +35,22 @@
 				});
 				newProfile.set('user', user);
 				const createdProfileObj = await newProfile.save();
+				usersProfile.set(newProfile);
 				user.set(profile, createdProfileObj);
 				await user.save();
 				return {
 					status: 'passed'
 				};
 			}
+			const profileObj = {
+				mainAddress: profile.get('mainAddress'),
+				createdAt: profile.get('createdAt'),
+				bio: profile.get('bio'),
+				updatedAt: profile.get('updatedAt'),
+				username: profile.get('username'),
+				lowerUsername: profile.get('lower_username')
+			};
+			usersProfile.set(profileObj);
 			return {
 				status: 'passed'
 			};
@@ -77,6 +88,7 @@
 				if (status === 'passed') {
 					signInOpen = false;
 					open = false;
+					selectedAccount.set(user.get('ethAddress'));
 					eagerConnect.set('1');
 					goto('/feed');
 				} else {
