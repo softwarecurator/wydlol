@@ -23,10 +23,12 @@
 
 		moralisStarted = true;
 	};
-
+	let windowWidth;
 	onMount(() => {
 		configureMoralis();
-		init();
+		let provider;
+		if (windowWidth < 768) provider = 'walletconnect';
+		init(provider);
 	});
 </script>
 
@@ -44,6 +46,8 @@
 	<meta name="twitter:site" content="https://twitter.com/wydlolxyz" />
 	<meta name="twitter:creator" content="@wydlolxyz" />
 </svelte:head>
+
+<svelte:window bind:innerWidth={windowWidth} />
 
 {#if moralisStarted}
 	<div class="flex dark:bg-slate-900">

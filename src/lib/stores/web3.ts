@@ -32,54 +32,59 @@ const unsubscribers = () => {
 	web3.set(null);
 };
 
-export const init = async () => {
+export const init = async (provider = null) => {
 	unsubscribers();
 	if (get(eagerConnect)) {
-		const web3Data = await Moralis.enableWeb3();
-		connected.set(true);
+		try {
+			await Moralis.enableWeb3({
+				provider
+			});
+			connected.set(true);
 
-		onAccountUnsubscribe = Moralis.onAccountChanged((newAccount) => {
-			selectedAccount.set(newAccount);
-		});
+			onAccountUnsubscribe = Moralis.onAccountChanged((newAccount) => {
+				selectedAccount.set(newAccount);
+			});
 
-		onWeb3Unsubscribe = Moralis.onWeb3Enabled((result) => {
-			chainId.set(result.chainId);
-			selectedAccount.set(result.account);
-		});
+			onWeb3Unsubscribe = Moralis.onWeb3Enabled((result) => {
+				chainId.set(result.chainId);
+				selectedAccount.set(result.account);
+			});
 
-		onChainUnsubscribe = Moralis.onChainChanged((chain) => {
-			chainId.set(chain);
-		});
+			onChainUnsubscribe = Moralis.onChainChanged((chain) => {
+				chainId.set(chain);
+			});
 
-		onWeb3DeactivatedUnsubscribe = Moralis.onWeb3Deactivated((error) => {
-			chainId.set(null);
-			selectedAccount.set(null);
-		});
+			onWeb3DeactivatedUnsubscribe = Moralis.onWeb3Deactivated((error) => {
+				chainId.set(null);
+				selectedAccount.set(null);
+			});
 
-		const account = await Moralis.account;
-		const setChainId = await Moralis.chainId;
-		const user = Moralis.User.current();
-		if (user) {
-			const lower = user.get('ethAddress').toLowerCase();
+			const account = await Moralis.account;
+			const setChainId = await Moralis.chainId;
+			const user = Moralis.User.current();
+			if (user) {
+				const lower = user.get('ethAddress').toLowerCase();
 
-			const profile = await new Moralis.Query(Moralis.Object.extend('Profile'))
-				.equalTo('mainAddress', lower)
-				.first();
+				const profile = await new Moralis.Query(Moralis.Object.extend('Profile'))
+					.equalTo('mainAddress', lower)
+					.first();
 
-			const profileObj = {
-				mainAddress: profile.get('mainAddress'),
-				createdAt: profile.get('createdAt'),
-				bio: profile.get('bio'),
-				updatedAt: profile.get('updatedAt'),
-				username: profile.get('username'),
-				lowerUsername: profile.get('lower_username')
-			};
+				const profileObj = {
+					mainAddress: profile.get('mainAddress'),
+					createdAt: profile.get('createdAt'),
+					bio: profile.get('bio'),
+					updatedAt: profile.get('updatedAt'),
+					username: profile.get('username'),
+					lowerUsername: profile.get('lower_username')
+				};
 
-			usersProfile.set(profileObj);
+				usersProfile.set(profileObj);
+			}
+
+			chainId.set(setChainId);
+			selectedAccount.set(account);
+		} catch (err) {
+			console.log(err);
 		}
-
-		chainId.set(setChainId);
-		web3.set(web3Data);
-		selectedAccount.set(account);
 	}
 };
