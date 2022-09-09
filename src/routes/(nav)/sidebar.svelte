@@ -52,8 +52,8 @@
 				on:click|stopPropagation={() => null}
 				class="bg-slate-100 dark:bg-zinc-900  h-full max-w-md min-w-[20rem] fixed flex flex-col overflow-hidden z-50 items-start top-0 right-0 justify-start w-10/12 md:w-1/5"
 			>
-				<div class="flex items-center justify-end w-full p-6 text-gray-200">
-					<div class="text-gray-200 cursor-pointer" on:click={() => (profileOpen = !profileOpen)}>
+				<div class="flex items-center justify-end w-full p-6 text-black dark:text-gray-200">
+					<div class="cursor-pointer" on:click={() => (profileOpen = !profileOpen)}>
 						<Fa icon={faTimes} scale={1.5} />
 					</div>
 				</div>

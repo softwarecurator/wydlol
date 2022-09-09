@@ -15,6 +15,8 @@
 	export let data;
 	let moralisStarted = false;
 	$: profileOpen = false;
+	$: resultsClosed = true;
+
 	const configureMoralis = () => {
 		Moralis.start({
 			serverUrl: env.PUBLIC_MORALIS_SERVER_URL,
@@ -60,7 +62,7 @@
 	<div class="flex dark:bg-slate-900 w-full">
 		<Toasts />
 		<Sidebar bind:profileOpen />
-		<Navbar bind:profileOpen />
+		<Navbar bind:profileOpen bind:resultsClosed />
 		<div class="mt-20">
 			<main class="flex flex-col items-center justify-center w-screen">
 				<slot />

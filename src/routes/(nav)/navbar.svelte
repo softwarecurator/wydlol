@@ -5,6 +5,7 @@
 	import Fa from 'svelte-fa/src/fa.svelte';
 	import { faWallet } from '@fortawesome/free-solid-svg-icons';
 	import { usersProfile } from '$lib/stores/user';
+	import SearchBar from './search.svelte';
 
 	$: open = false;
 	$: isDark = true;
@@ -22,6 +23,7 @@
 	};
 
 	export let profileOpen;
+	export let resultsClosed;
 
 	$: openModal = () => {
 		open = !open;
@@ -43,11 +45,14 @@
 
 <nav class="w-full fixed -top-1 z-30">
 	<WalletModal bind:open />
-	<div class="relative bg-transparent backdrop-blur-md max-h-[85px]">
+	<div class="relative bg-zinc-100 dark:bg-transparent backdrop-blur-md max-h-[85px]">
 		<div class="relative z-20">
-			<div class="flex items-center justify-between px-4 py-5">
+			<div class="flex items-center justify-between gap-8 px-4 py-5">
 				<div>
 					<a href="/" class="text-2xl md:text-4xl dark:text-white">wyd lol? 🙈</a>
+				</div>
+				<div class="hidden md:flex grow">
+					<SearchBar bind:resultsClosed isSearchMobile={false} open={false} />
 				</div>
 				<div class="flex items-center justify-end gap-x-8">
 					<div class="flex items-center text-sm">
