@@ -92,9 +92,3 @@
 		</div>
 	</div>
 </nav>
-
-<style lang="postcss">
-	.btn-cta {
-		@apply relative z-50 rounded-md inline-flex items-center px-4 py-2 text-sm  shadow-sm;
-	}
-</style>
