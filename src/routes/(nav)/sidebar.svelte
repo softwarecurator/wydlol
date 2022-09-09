@@ -39,7 +39,7 @@
 </script>
 
 {#await me then data}
-	{#if $usersProfile && data.user}
+	{#if $usersProfile && data?.user}
 		<aside
 			class="h-screen fixed z-40 top-0 right-0 left-0 bottom-0 transform ease-in-out transition-all overflow-hidden duration-300 translate-x-full"
 			on:click={() => (profileOpen = !profileOpen)}
