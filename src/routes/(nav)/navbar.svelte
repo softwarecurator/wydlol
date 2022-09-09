@@ -41,7 +41,7 @@
 
 <nav class="w-full fixed -top-1 z-30">
 	<WalletModal bind:open />
-	<div class="relative bg-transparent backdrop-blur-md max-h-[85px] p-2">
+	<div class="relative bg-transparent backdrop-blur-md max-h-[85px]">
 		<div class="relative z-20">
 			<div class="flex items-center justify-between px-4 py-5">
 				<div>
