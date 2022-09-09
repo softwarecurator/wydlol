@@ -128,7 +128,7 @@
 
 <style lang="postcss">
 	.profileOpen {
-		@apply translate-x-0;
+		@apply transform ease-in-out transition-all overflow-hidden duration-300 translate-x-0;
 	}
 
 	.copied {
