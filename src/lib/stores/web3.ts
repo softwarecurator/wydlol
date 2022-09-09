@@ -1,11 +1,12 @@
 import { writable } from 'svelte/store';
-import Moralis from 'moralis';
+import { Moralis } from 'moralis';
 import { eagerConnect, usersProfile } from './user';
 import { get } from 'svelte/store';
 
 export const connected = writable<boolean>(false);
 export const chainId = writable<string>(null);
 export const selectedAccount = writable<string>(null);
+export const web3 = writable<any>(null);
 
 let onAccountUnsubscribe;
 let onWeb3Unsubscribe;
@@ -28,12 +29,13 @@ const unsubscribers = () => {
 	connected.set(false);
 	chainId.set(null);
 	selectedAccount.set('');
+	web3.set(null);
 };
 
 export const init = async () => {
 	unsubscribers();
 	if (get(eagerConnect)) {
-		await Moralis.enableWeb3();
+		const web3Data = await Moralis.enableWeb3();
 		connected.set(true);
 
 		onAccountUnsubscribe = Moralis.onAccountChanged((newAccount) => {
@@ -57,23 +59,27 @@ export const init = async () => {
 		const account = await Moralis.account;
 		const setChainId = await Moralis.chainId;
 		const user = Moralis.User.current();
-		const lower = user.get('ethAddress').toLowerCase();
+		if (user) {
+			const lower = user.get('ethAddress').toLowerCase();
 
-		const profile = await new Moralis.Query(Moralis.Object.extend('Profile'))
-			.equalTo('mainAddress', lower)
-			.first();
+			const profile = await new Moralis.Query(Moralis.Object.extend('Profile'))
+				.equalTo('mainAddress', lower)
+				.first();
 
-		const profileObj = {
-			mainAddress: profile.get('mainAddress'),
-			createdAt: profile.get('createdAt'),
-			bio: profile.get('bio'),
-			updatedAt: profile.get('updatedAt'),
-			username: profile.get('username'),
-			lowerUsername: profile.get('lower_username')
-		};
+			const profileObj = {
+				mainAddress: profile.get('mainAddress'),
+				createdAt: profile.get('createdAt'),
+				bio: profile.get('bio'),
+				updatedAt: profile.get('updatedAt'),
+				username: profile.get('username'),
+				lowerUsername: profile.get('lower_username')
+			};
+
+			usersProfile.set(profileObj);
+		}
 
 		chainId.set(setChainId);
-		usersProfile.set(profileObj);
+		web3.set(web3Data);
 		selectedAccount.set(account);
 	}
 };

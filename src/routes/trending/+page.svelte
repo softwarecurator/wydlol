@@ -2,8 +2,8 @@
 	import Timeline from '$lib/components/feed/timeline.svelte';
 	export let data;
 
-	$: trending = data;
-	let contractAddress = data.activities[0].collection.collectionId;
+	$: trending = data.trending;
+	let contractAddress = data.trending.activities[0].collection.collectionId;
 
 	$: {
 		fetch(`/api/trending?contract=${contractAddress}`).then(async (res) => {

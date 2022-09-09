@@ -48,7 +48,7 @@
 {#if moralisStarted}
 	<div class="flex dark:bg-slate-900">
 		<Toasts />
-		<Sidebar bind:profileOpen user={data.user} />
+		<Sidebar bind:profileOpen />
 		<Navbar bind:profileOpen />
 		<div class="mt-20">
 			<main class="flex flex-col items-center justify-center w-screen">

@@ -13,5 +13,8 @@ export async function load() {
 		}
 	);
 	const trending = await data.json();
-	return trending;
+	return {
+		trending,
+		title: 'Trending'
+	};
 }

@@ -14,7 +14,10 @@ export async function load({ params, parent }) {
 	const user = await new Moralis.Query(Moralis.Object.extend('Profile'))
 		.equalTo('lower_username', params.ETHAddress.toLowerCase())
 		.first();
-	if (validateInputAddresses(params.ETHAddress) || user) {
+	let valid = false;
+
+	valid = validateInputAddresses(params.ETHAddress);
+	if (valid || user) {
 		if (user) {
 			const data = await fetch(
 				`https://api.reservoir.tools/users/${user.get('mainAddress')}/tokens/v3`,
@@ -51,7 +54,7 @@ export async function load({ params, parent }) {
 			user: { mainAddress: params.ETHAddress, username: params.ETHAddress },
 			nfts,
 			image,
-			title: params.ETHAddress,
+			title: params.ETHAddress
 		};
 	}
 

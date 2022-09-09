@@ -26,7 +26,10 @@ export async function load({ request, parent }) {
 
 		const feed = await data.json();
 
-		return feed;
+		return {
+			feed,
+			title: 'Feed'
+		};
 	}
 
 	throw redirect(307, '/trending');

@@ -3,4 +3,4 @@
 	export let data;
 </script>
 
-<Timeline activities={data.activities} />
+<Timeline activities={data.feed.activities} />
