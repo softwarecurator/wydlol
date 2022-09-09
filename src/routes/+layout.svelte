@@ -9,6 +9,7 @@
 	import Toasts from '$lib/components/toasts/toasts.svelte';
 	import Navbar from './(nav)/navbar.svelte';
 	import Sidebar from './(nav)/sidebar.svelte';
+	import BottomBar from './(nav)/bottombar.svelte';
 	import { init } from '$lib/stores/web3';
 	import { page } from '$app/stores';
 
@@ -67,6 +68,7 @@
 			<main class="flex flex-col items-center justify-center w-screen">
 				<slot />
 			</main>
+			<BottomBar />
 		</div>
 	</div>
 {/if}
