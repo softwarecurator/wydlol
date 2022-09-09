@@ -28,6 +28,7 @@ const unsubscribers = () => {
 
 	connected.set(false);
 	chainId.set(null);
+	usersProfile.set(null);
 	selectedAccount.set('');
 	web3.set(null);
 };
