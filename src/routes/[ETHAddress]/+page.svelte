@@ -32,14 +32,19 @@
 				{#if data.nfts.tokens.length}
 					{#each data.nfts.tokens as nft}
 						{#if nft.token.image}
-							<div
-								class="flex grow min-w-full max-w-lg mb-2 divide-y divide-black bg-slate-50 dark:bg-slate-800"
+							<a
+								href={`/${nft.token.collection.id}/${nft.token.tokenId}`}
+								class="hover:cursor-pointer h-full w-full object-contain"
 							>
-								<div class="flex flex-col w-full items-start m-2">
-									<p class="dark:text-white">{nft.token.name}</p>
-									<Image src={nft.token.image} />
+								<div
+									class="flex grow min-w-full max-w-lg mb-2 divide-y divide-black bg-slate-50 dark:bg-slate-800"
+								>
+									<div class="flex flex-col w-full items-start m-2">
+										<p class="dark:text-white">{nft.token.name}</p>
+										<Image src={nft.token.image} />
+									</div>
 								</div>
-							</div>
+							</a>
 						{/if}
 					{/each}
 				{:else}

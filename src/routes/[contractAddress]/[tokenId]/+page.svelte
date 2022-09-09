@@ -44,13 +44,16 @@
 					{data.token.description}
 				</p>
 			{/if}
-			<p class="dark:text-slate-400">
-				Last Sale Price: {data.token.lastSell.value} ETH · <Time
-					timestamp={new Date(data.token.lastSell.timestamp * 1000)}
-					live
-					relative
-				/>
-			</p>
+			{#if data.token.lastSell.value}
+				<p class="dark:text-slate-400">
+					Last Sale Price: {data.token.lastSell.value} ETH · <Time
+						timestamp={new Date(data.token.lastSell.timestamp * 1000)}
+						live
+						relative
+					/>
+				</p>
+			{/if}
+
 			<div>
 				<div>
 					<div class="flex items-start justify-start mt-4 gap-4">
