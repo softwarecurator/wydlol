@@ -57,7 +57,7 @@
 <svelte:window bind:innerWidth={windowWidth} />
 
 {#if moralisStarted}
-	<div class="flex dark:bg-slate-900">
+	<div class="flex dark:bg-slate-900 w-full">
 		<Toasts />
 		<Sidebar bind:profileOpen />
 		<Navbar bind:profileOpen />
