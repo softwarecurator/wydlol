@@ -13,7 +13,6 @@
 	import { init } from '$lib/stores/web3';
 	import { page } from '$app/stores';
 
-	export let data;
 	let moralisStarted = false;
 	$: profileOpen = false;
 	$: resultsClosed = true;
@@ -26,12 +25,10 @@
 
 		moralisStarted = true;
 	};
-	let windowWidth;
+
 	onMount(() => {
 		configureMoralis();
-		let provider;
-		if (windowWidth < 768) provider = 'walletconnect';
-		init(provider);
+		init();
 	});
 </script>
 
@@ -56,8 +53,6 @@
 		</style>
 	{/if}
 </svelte:head>
-
-<svelte:window bind:innerWidth={windowWidth} />
 
 {#if moralisStarted}
 	<div class="flex dark:bg-slate-900 w-full">

@@ -2,6 +2,7 @@ import { writable } from 'svelte/store';
 import { Moralis } from 'moralis';
 import { eagerConnect, usersProfile } from './user';
 import { get } from 'svelte/store';
+import { isMobileDevice } from '$lib/utilities/isMobileDevice';
 
 export const connected = writable<boolean>(false);
 export const chainId = writable<string>(null);
@@ -33,13 +34,18 @@ const unsubscribers = () => {
 	web3.set(null);
 };
 
-export const init = async (provider = null) => {
+export const init = async () => {
 	unsubscribers();
 	if (get(eagerConnect)) {
 		try {
-			await Moralis.enableWeb3({
-				provider
-			});
+			if (isMobileDevice.any()) {
+				await Moralis.enableWeb3({
+					provider: 'walletConnect'
+				});
+			} else {
+				await Moralis.enableWeb3({});
+			}
+
 			connected.set(true);
 
 			onAccountUnsubscribe = Moralis.onAccountChanged((newAccount) => {

@@ -16,6 +16,10 @@ export async function load({ request }) {
 			.equalTo('mainAddress', lower)
 			.first();
 
-		return { user, image: 'https://i.kym-cdn.com/entries/icons/mobile/000/021/885/keyboardkey.jpg', title: 'wydlol' };
+		return {
+			user,
+			image: 'https://i.kym-cdn.com/entries/icons/mobile/000/021/885/keyboardkey.jpg',
+			title: 'wydlol'
+		};
 	}
 }
