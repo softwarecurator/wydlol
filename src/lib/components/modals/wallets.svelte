@@ -2,6 +2,7 @@
 	import { clickOutside } from '$lib/utilities/clickOutside';
 	import Login from '$lib/components/auth/login.svelte';
 	import { Icon, X } from 'svelte-hero-icons';
+	import { isMobileDevice } from '$lib/utilities/isMobileDevice';
 
 	export let open;
 
@@ -31,18 +32,20 @@
 					</div>
 					<div class="gradient-border rounded-def mt-[1px]">
 						<div class="rounded-def bg-black px-6 py-5 space-y-[1px]">
-							<Login bind:open>
-								<div
-									class="border uppercase cursor-pointer border-grey5 rounded-def bg-grey4 w-full text-center text-white py-1 hidden md:flex items-center justify-start px-5 gap-x-3"
-								>
-									<img
-										src="/images/icons/metamask.svg"
-										class="object-cover w-9 h-9"
-										alt="metamask"
-									/>
-									MetaMask
-								</div>
-							</Login>
+							{#if !isMobileDevice.any()}
+								<Login bind:open>
+									<div
+										class="border uppercase cursor-pointer border-grey5 rounded-def bg-grey4 w-full text-center text-white py-1 flex items-center justify-start px-5 gap-x-3"
+									>
+										<img
+											src="/images/icons/metamask.svg"
+											class="object-cover w-9 h-9"
+											alt="metamask"
+										/>
+										MetaMask
+									</div>
+								</Login>
+							{/if}
 							<Login provider="walletconnect" bind:open>
 								<div
 									class="border uppercase cursor-pointer border-grey5 rounded-def bg-grey4 w-full text-center text-white py-1 flex items-center justify-start px-5 gap-x-3"

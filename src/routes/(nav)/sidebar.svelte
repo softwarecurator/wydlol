@@ -8,7 +8,7 @@
 	import Moralis from '$lib/utilities/moralisPkg';
 	import { goto } from '$app/navigation';
 
-	$: me = isLoggedIn();
+	$: me = Moralis.User.current();
 
 	const disconnect = async () => {
 		await Moralis.User.logOut();
@@ -33,7 +33,7 @@
 
 	$: {
 		if ($eagerConnect) {
-			me = isLoggedIn();
+			me = Moralis.User.current();
 		}
 	}
 </script>

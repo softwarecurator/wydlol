@@ -3,6 +3,7 @@ import { Moralis } from 'moralis';
 import { eagerConnect, usersProfile } from './user';
 import { get } from 'svelte/store';
 import { isMobileDevice } from '$lib/utilities/isMobileDevice';
+import Cookies from 'js-cookie';
 
 export const connected = writable<boolean>(false);
 export const chainId = writable<string>(null);
@@ -70,6 +71,10 @@ export const init = async () => {
 			const setChainId = await Moralis.chainId;
 			const user = Moralis.User.current();
 			if (user) {
+				//Setting Login Cookies
+				Cookies.set('wyd-session', user.get('sessionToken'), { secure: true });
+				Cookies.set('wyd-user', user.get('ethAddress'), { secure: true });
+
 				const lower = user.get('ethAddress').toLowerCase();
 
 				const profile = await new Moralis.Query(Moralis.Object.extend('Profile'))
