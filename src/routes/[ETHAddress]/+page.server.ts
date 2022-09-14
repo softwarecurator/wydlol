@@ -17,6 +17,8 @@ export async function load({ params, parent }) {
 	let valid = false;
 
 	valid = validateInputAddresses(params.ETHAddress);
+
+	if (params.ETHAddress.toLowerCase().includes('.eth')) valid = true;
 	if (valid || user) {
 		if (user) {
 			const data = await fetch(
