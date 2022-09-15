@@ -1,6 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import { getCookies } from '$lib/utilities/getCookies';
 import { RESERVIOR_KEY } from '$env/static/private';
+import Moralis from 'moralis/node';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ request, parent }) {
@@ -10,6 +11,18 @@ export async function load({ request, parent }) {
 		const accounts = [];
 
 		accounts.push(`users=${user.get('mainAddress')}`);
+
+		const following = await new Moralis.Query(Moralis.Object.extend('Follow'))
+		.equalTo('profile', {
+			__type: 'Pointer',
+			className: 'Profile',
+			objectId: user.id
+		})
+		.find();
+
+		for (const follower of following) {
+			accounts.push(`&users=${follower.get('watching')}`);
+		}
 
 		const data = await fetch(
 			`https://api.reservoir.tools/users/activity/v2?${accounts.join(
