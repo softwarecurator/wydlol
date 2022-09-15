@@ -10,12 +10,12 @@
 	} from '@fortawesome/free-solid-svg-icons';
 	const dispatch = createEventDispatcher();
 
-	export let type: 'default' | 'err' | 'success' | 'info' = 'default';
+	export let type: 'default' | 'error' | 'success' | 'info' = 'default';
 	export let dismissible = true;
 
 	const switchIcons = () => {
 		switch (type) {
-			case 'err':
+			case 'error':
 				return faExclamationCircle;
 			case 'success':
 				return faCheckCircle;
@@ -49,7 +49,7 @@
 </article>
 
 <style lang="postcss">
-	.err {
+	.error {
 		@apply bg-red-600;
 	}
 	.success {
